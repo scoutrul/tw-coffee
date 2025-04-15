@@ -80,21 +80,18 @@
       :sort="sort"
       @update:sort="sort = $event"
     >
-      <!-- Статус товара -->
       <template #status-data="{ row }">
-        <UBadge :color="(row as Product).status === 'available' ? 'success' : 'error'" size="sm">
-          {{ (row as Product).status === 'available' ? 'В наличии' : 'Отсутствует' }}
+        <UBadge :color="getProduct(row).status === 'available' ? 'success' : 'error'" size="sm">
+          {{ getProduct(row).status === 'available' ? 'В наличии' : 'Отсутствует' }}
         </UBadge>
       </template>
       
-      <!-- Дата создания -->
       <template #date_created-data="{ row }">
-        {{ formatDate((row as Product).date_created) }}
+        {{ formatDate(getProduct(row).date_created) }}
       </template>
       
-      <!-- Цена -->
       <template #price-data="{ row }">
-        {{ formatPrice((row as Product).price) }}
+        {{ formatPrice(getProduct(row).price) }}
       </template>
     </UTable>
     
@@ -104,20 +101,19 @@
         v-model="page" 
         :page-count="pageCount" 
         :total="filteredProducts.length"
-        :ui="{ wrapper: 'flex items-center gap-1' }"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import type { Product } from '~/types/product'
+import type { TableColumn } from '#ui/types'
 
-// Определяем тип для сортировки
-interface TableSort {
-  column: string | null;
-  direction: 'asc' | 'desc';
+// Вспомогательная функция для безопасного получения продукта из row
+function getProduct(row: any): Product {
+  return row as Product
 }
 
 const props = defineProps({
@@ -155,7 +151,7 @@ const categoryOptions = computed(() => {
 })
 
 // Сортировка
-const sort = ref<TableSort>({
+const sort = ref({
   column: 'name',
   direction: 'asc'
 })
@@ -196,7 +192,7 @@ const columns = [
     label: 'Дата создания',
     sortable: true
   }
-]
+] as unknown as TableColumn<Product, keyof Product>[]
 
 // Преобразование строки даты в объект Date для сравнения
 function parseDate(dateStr: string): Date {
@@ -268,16 +264,20 @@ const filteredProducts = computed(() => {
     
     // Сортировка по числовым полям
     if (column === 'id' || column === 'price') {
-      return (a[column as keyof Product] as number - b[column as keyof Product] as number) * direction
+      const aValue = Number(a[column as keyof Product])
+      const bValue = Number(b[column as keyof Product])
+      return direction * (aValue - bValue)
     }
     
     // Сортировка по дате
     if (column === 'date_created') {
-      return (new Date(a.date_created).getTime() - new Date(b.date_created).getTime()) * direction
+      return direction * (new Date(a.date_created).getTime() - new Date(b.date_created).getTime())
     }
     
     // Сортировка по строковым полям
-    return String(a[column as keyof Product]).localeCompare(String(b[column as keyof Product])) * direction
+    const aValue = String(a[column as keyof Product] || '')
+    const bValue = String(b[column as keyof Product] || '')
+    return direction * aValue.localeCompare(bValue)
   })
 })
 

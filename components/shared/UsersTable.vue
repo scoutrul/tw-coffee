@@ -19,13 +19,13 @@
       :empty-state="{ icon: 'i-heroicons-user-circle', label: 'Пользователи не найдены' }"
     >
       <template #status-data="{ row }">
-        <UBadge :color="(row as User).active ? 'success' : 'error'" size="sm">
-          {{ (row as User).active ? 'Активен' : 'Неактивен' }}
+        <UBadge :color="getUser(row).active ? 'success' : 'error'" size="sm">
+          {{ getUser(row).active ? 'Активен' : 'Неактивен' }}
         </UBadge>
       </template>
       
       <template #created-data="{ row }">
-        {{ formatDate((row as User).created) }}
+        {{ formatDate(getUser(row).created) }}
       </template>
       
       <template #actions-data="{ row }">
@@ -34,7 +34,7 @@
           variant="ghost"
           icon="i-heroicons-pencil-square" 
           size="xs"
-          @click="editUser(row as User)"
+          @click="editUser(getUser(row))"
         />
         
         <UButton 
@@ -42,7 +42,7 @@
           variant="ghost"
           icon="i-heroicons-trash" 
           size="xs"
-          @click="deleteUser(row as User)"
+          @click="deleteUser(getUser(row))"
         />
       </template>
     </UTable>
@@ -67,6 +67,60 @@
 import { ref, computed } from 'vue'
 import type { User } from '~/types/user'
 import type { TableColumn } from '#ui/types'
+
+// Вспомогательная функция для безопасного получения пользователя из row
+function getUser(row: any): User {
+  return row as User
+}
+
+// Состояние таблицы
+const loading = ref(false)
+const search = ref('')
+const page = ref(1)
+const perPage = ref(10)
+const selectedStatus = ref('')
+
+// Определение колонок таблицы
+const columns = [
+  {
+    key: 'name',
+    label: 'Имя',
+    sortable: true
+  },
+  {
+    key: 'credentials.username',
+    label: 'Email',
+    sortable: true
+  },
+  {
+    key: 'status',
+    label: 'Статус'
+  },
+  {
+    key: 'created',
+    label: 'Дата регистрации',
+    sortable: true
+  },
+  {
+    key: 'actions',
+    label: 'Действия',
+    align: 'center'
+  }
+] as unknown as TableColumn<User, keyof User>[]
+
+// Опции для фильтров
+const statusOptions = [
+  { text: 'Все пользователи', value: '' },
+  { text: 'Активные', value: 'active' },
+  { text: 'Неактивные', value: 'inactive' }
+]
+
+const perPageOptions = [
+  { text: '5 записей', value: 5 },
+  { text: '10 записей', value: 10 },
+  { text: '25 записей', value: 25 },
+  { text: '50 записей', value: 50 }
+]
 
 // Имитация данных пользователей
 const users = ref<User[]>([
@@ -121,55 +175,6 @@ const users = ref<User[]>([
     created: '02.03.2025 15:40:12'
   }
 ])
-
-// Состояние таблицы
-const loading = ref(false)
-const search = ref('')
-const page = ref(1)
-const perPage = ref(10)
-const selectedStatus = ref('')
-
-// Определение колонок таблицы
-const columns: TableColumn<User>[] = [
-  {
-    key: 'name',
-    label: 'Имя',
-    sortable: true
-  },
-  {
-    key: 'credentials.username',
-    label: 'Email',
-    sortable: true
-  },
-  {
-    key: 'status',
-    label: 'Статус'
-  },
-  {
-    key: 'created',
-    label: 'Дата регистрации',
-    sortable: true
-  },
-  {
-    key: 'actions',
-    label: 'Действия',
-    align: 'center'
-  }
-]
-
-// Опции для фильтров
-const statusOptions = [
-  { text: 'Все пользователи', value: '' },
-  { text: 'Активные', value: 'active' },
-  { text: 'Неактивные', value: 'inactive' }
-]
-
-const perPageOptions = [
-  { text: '5 записей', value: 5 },
-  { text: '10 записей', value: 10 },
-  { text: '25 записей', value: 25 },
-  { text: '50 записей', value: 50 }
-]
 
 // Фильтрация пользователей
 const filteredUsers = computed(() => {
