@@ -138,4 +138,43 @@
 
 .mt-4 {
   margin-top: $spacing-unit * 1.5;
+}
+
+// Toast уведомления
+.u-toaster {
+  position: fixed !important;
+  z-index: 9999 !important;
+}
+
+.u-toaster[data-position='bottom-left'] {
+  bottom: 1rem !important;
+  left: 1rem !important;
+  right: auto !important;
+}
+
+.u-toast {
+  margin-bottom: 0.5rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  border-radius: $border-radius !important;
+  overflow: hidden !important;
+}
+
+.u-toast.primary {
+  border-left: 4px solid $primary-color !important;
+}
+
+.u-toast.success {
+  border-left: 4px solid $success-color !important;
+}
+
+.u-toast.error {
+  border-left: 4px solid $error-color !important;
+}
+
+.u-toast.info {
+  border-left: 4px solid $info-color !important;
+}
+
+.u-toast.warning {
+  border-left: 4px solid $warning-color !important;
 } 

@@ -36,6 +36,19 @@ export default defineAppConfig({
       default: {
         color: 'primary'
       }
+    },
+    toast: {
+      default: {
+        position: 'bottom-left',
+        duration: 30000,
+        class: 'custom-toast',
+        closeButton: {
+          icon: 'i-heroicons-x-mark-20-solid',
+          color: 'gray',
+          variant: 'link',
+          padded: true
+        }
+      }
     }
   }
 }) 
