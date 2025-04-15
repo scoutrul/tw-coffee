@@ -1,5 +1,5 @@
 <template>
-  <form class="login-form" @submit.prevent="onSubmit">
+  <UForm :state="form" class="login-form" @submit="handleSubmit" :validate="validateForm">
     <div class="form-group">
       <label for="email">Email</label>
       <UInput
@@ -9,9 +9,8 @@
         icon="i-heroicons-envelope"
         size="lg"
         :disabled="loading"
-        :color="emailError ? 'error' : undefined"
       />
-      <p v-if="emailError" class="form-error">{{ emailError }}</p>
+      <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.email }}</p>
     </div>
 
     <div class="form-group">
@@ -24,9 +23,8 @@
         icon="i-heroicons-lock-closed"
         size="lg"
         :disabled="loading"
-        :color="passwordError ? 'error' : undefined"
       />
-      <p v-if="passwordError" class="form-error">{{ passwordError }}</p>
+      <p v-if="errors.password" class="text-red-500 text-sm mt-1">{{ errors.password }}</p>
     </div>
 
     <UAlert
@@ -47,17 +45,19 @@
         size="lg"
         block
         :loading="loading"
+        loading-icon="i-heroicons-arrow-path"
         icon="i-heroicons-arrow-right-circle-20-solid"
         trailing
+        loading-auto
       >
         {{ submitText }}
       </UButton>
     </div>
-  </form>
+  </UForm>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, reactive } from 'vue'
 
 const props = defineProps({
   submitText: {
@@ -69,38 +69,63 @@ const props = defineProps({
 const emit = defineEmits(['submit'])
 
 const { error: authError, loading } = useAuth()
+const toast = useToast()
 
 const form = ref({
   email: '',
   password: ''
 })
 
-// Валидация формы
-const emailError = computed(() => {
-  if (!form.value.email) return ''
-  if (!form.value.email.includes('@')) 
-    return 'Введите корректный email'
-  return ''
+const errors = reactive({
+  email: '',
+  password: ''
 })
 
-const passwordError = computed(() => {
-  if (!form.value.password) return ''
-  if (form.value.password.length < 3) 
-    return 'Пароль должен содержать не менее 3 символов'
-  return ''
-})
-
-async function onSubmit() {
-  // Проверка формы
-  if (emailError.value || passwordError.value) {
-    return
+// Валидация формы для UForm
+async function validateForm(state: Partial<typeof form.value>) {
+  // Сбрасываем ошибки
+  errors.email = ''
+  errors.password = ''
+  
+  const validationErrors = []
+  
+  // Валидация email
+  if (!state.email) {
+    errors.email = 'Email обязателен'
+    validationErrors.push({ path: 'email', message: errors.email })
+  } else if (state.email && !state.email.includes('@')) {
+    errors.email = 'Введите корректный email'
+    validationErrors.push({ path: 'email', message: errors.email })
   }
+  
+  // Валидация пароля
+  if (!state.password) {
+    errors.password = 'Пароль обязателен'
+    validationErrors.push({ path: 'password', message: errors.password })
+  } else if (state.password && state.password.length < 3) {
+    errors.password = 'Пароль должен содержать не менее 3 символов'
+    validationErrors.push({ path: 'password', message: errors.password })
+  }
+  
+  return validationErrors
+}
 
+async function handleSubmit() {
   // Вызываем событие submit с данными формы
   emit('submit', {
     email: form.value.email,
     password: form.value.password
   })
+  
+  // Показываем уведомление об успешном входе (только для демонстрации)
+  if (!authError.value) {
+    toast.add({
+      title: 'Вход выполнен',
+      description: 'Вы успешно вошли в систему',
+      color: 'success',
+      icon: 'i-heroicons-check-circle'
+    })
+  }
 }
 </script>
 
@@ -121,12 +146,6 @@ async function onSubmit() {
     margin-bottom: $spacing-unit * 0.25;
     font-weight: $font-weight-medium;
   }
-}
-
-.form-error {
-  color: $error-color;
-  font-size: $font-size-sm;
-  margin-top: $spacing-unit * 0.25;
 }
 
 .form-actions {
