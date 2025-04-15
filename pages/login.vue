@@ -1,11 +1,26 @@
 <template>
-  <div class="login-page">
-    <h1>Вход в Империю Кофе</h1>
-    <div class="login-form">
-      <!-- Здесь будет форма логина -->
-      <p>Форма авторизации будет добавлена позже</p>
-      <NuxtLink to="/" class="link">Вернуться на главную</NuxtLink>
-    </div>
+  <div class="login-page container">
+    <UCard class="login-card">
+      <template #header>
+        <h1 class="text-center">Вход в Империю Кофе</h1>
+      </template>
+
+      <div class="login-form">
+        <p class="text-center text-gray-500 mb-4">Форма авторизации будет добавлена позже</p>
+        
+        <UDivider />
+        
+        <div class="text-center mt-4">
+          <UButton
+            to="/"
+            variant="link"
+            color="primary"
+          >
+            Вернуться на главную
+          </UButton>
+        </div>
+      </div>
+    </UCard>
   </div>
 </template>
 
@@ -13,7 +28,7 @@
 // Страница логина
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .login-page {
   display: flex;
   flex-direction: column;
@@ -23,19 +38,12 @@
   padding: 1rem;
 }
 
+.login-card {
+  width: 100%;
+  max-width: 450px;
+}
+
 .login-form {
-  margin-top: 2rem;
-  text-align: center;
-}
-
-.link {
-  display: inline-block;
-  margin-top: 1rem;
-  color: #4CAF50;
-  text-decoration: none;
-}
-
-.link:hover {
-  text-decoration: underline;
+  padding: 1rem;
 }
 </style> 

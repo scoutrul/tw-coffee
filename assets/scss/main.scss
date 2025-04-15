@@ -1,0 +1,60 @@
+// Переменные
+$primary-color: #4CAF50;
+$primary-color-hover: #45a049;
+$text-color: #333;
+$background-color: #f5f5f5;
+$card-background: #fff;
+$border-radius: 4px;
+$spacing-unit: 1rem;
+
+// Базовые стили
+body {
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: $text-color;
+  background-color: $background-color;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.button {
+  display: inline-block;
+  background-color: $primary-color;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: $border-radius;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  border: none;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: $primary-color-hover;
+    text-decoration: none;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-unit;
+} 

@@ -1,10 +1,23 @@
 <template>
-  <div class="welcome-page">
-    <h1>Империя Кофе</h1>
-    <p>Веб-приложение для управления данными пользователей</p>
-    <div class="actions">
-      <NuxtLink to="/login" class="button">Войти в систему</NuxtLink>
-    </div>
+  <div class="welcome-page container">
+    <UCard class="welcome-card">
+      <template #header>
+        <h1 class="text-center">Империя Кофе</h1>
+      </template>
+
+      <div class="text-center py-4">
+        <p>Веб-приложение для управления данными пользователей</p>
+        <UDivider />
+        <UButton
+          to="/login"
+          color="primary"
+          size="lg"
+          class="mt-4"
+        >
+          Войти в систему
+        </UButton>
+      </div>
+    </UCard>
   </div>
 </template>
 
@@ -12,38 +25,18 @@
 // Главная страница приложения
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .welcome-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  text-align: center;
   padding: 1rem;
 }
 
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.actions {
-  margin-top: 2rem;
-}
-
-.button {
-  display: inline-block;
-  background-color: #4CAF50;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.button:hover {
-  background-color: #45a049;
+.welcome-card {
+  width: 100%;
+  max-width: 550px;
 }
 </style> 
