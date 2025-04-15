@@ -126,7 +126,7 @@ const users = ref<User[]>([
 const loading = ref(false)
 const search = ref('')
 const page = ref(1)
-const perPage = ref(5)
+const perPage = ref(10)
 const selectedStatus = ref('')
 
 // Определение колонок таблицы
@@ -211,7 +211,7 @@ function formatDate(dateStr: string) {
 }
 
 // Действия с пользователями
-const toast = useToast()
+const toast = useCustomToast()
 
 function editUser(user: User) {
   toast.add({

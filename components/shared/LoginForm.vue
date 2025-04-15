@@ -69,7 +69,7 @@ const props = defineProps({
 const emit = defineEmits(['submit'])
 
 const { error: authError, loading } = useAuth()
-const toast = useToast()
+const toast = useCustomToast()
 
 const form = ref({
   email: '',
@@ -117,15 +117,8 @@ async function handleSubmit() {
     password: form.value.password
   })
   
-  // Показываем уведомление об успешном входе (только для демонстрации)
-  if (!authError.value) {
-    toast.add({
-      title: 'Вход выполнен',
-      description: 'Вы успешно вошли в систему',
-      color: 'success',
-      icon: 'i-heroicons-check-circle'
-    })
-  }
+  // Уведомления показываются в компоненте страницы логина
+  // через функцию handleLogin
 }
 </script>
 
