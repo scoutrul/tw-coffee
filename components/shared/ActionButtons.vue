@@ -2,23 +2,39 @@
   <div class="action-buttons">
     <UButton
       v-if="showLogoutButton"
-      color="primary"
-      variant="solid"
-      icon="i-heroicons-power-20-solid"
-      size="md"
+      color="error"
       class="logout-button"
       @click="handleLogout"
+      icon="i-heroicons-arrow-right-on-rectangle"
     >
-      Выйти из системы
+      Выход
     </UButton>
     
-    <slot></slot>
+    <UButton
+      color="primary"
+      @click="$emit('table')"
+      icon="i-heroicons-table-cells-20-solid"
+      class="me-2"
+    >
+      Пользователи
+    </UButton>
+    
+    <UButton
+      color="primary"
+      @click="$emit('products')"
+      icon="i-heroicons-shopping-bag-20-solid"
+      class="me-2"
+    >
+      Каталог
+    </UButton>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
 const toast = useCustomToast()
-const emit = defineEmits(['logout'])
+const emit = defineEmits(['logout', 'table', 'products'])
 
 defineProps({
   showLogoutButton: {

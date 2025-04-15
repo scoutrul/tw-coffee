@@ -1,0 +1,17 @@
+[
+{"id":1001,"name":"Эспрессо","category":"Кофе","price":120,"status":"available","date_created":"2023-05-10T08:00:00","description":"Насыщенный концентрированный кофе"},
+{"id":1002,"name":"Капучино","category":"Кофе","price":180,"status":"available","date_created":"2023-05-10T08:15:00","description":"Эспрессо с молочной пеной"},
+{"id":1003,"name":"Латте","category":"Кофе","price":190,"status":"available","date_created":"2023-05-10T09:30:00","description":"Кофе с большим количеством молока"},
+{"id":1004,"name":"Американо","category":"Кофе","price":140,"status":"available","date_created":"2023-05-11T10:45:00","description":"Эспрессо с добавлением воды"},
+{"id":1005,"name":"Флэт Уайт","category":"Кофе","price":200,"status":"available","date_created":"2023-05-12T12:20:00","description":"Эспрессо с горячим молоком"},
+{"id":1006,"name":"Раф","category":"Кофе","price":220,"status":"available","date_created":"2023-05-13T14:00:00","description":"Кофе со сливками и ванильным сахаром"},
+{"id":1007,"name":"Мокко","category":"Кофе","price":210,"status":"available","date_created":"2023-05-14T15:30:00","description":"Капучино с добавлением шоколада"},
+{"id":1008,"name":"Фраппе","category":"Холодные напитки","price":230,"status":"available","date_created":"2023-05-15T09:10:00","description":"Холодный кофейный напиток с молоком и льдом"},
+{"id":1009,"name":"Айс Латте","category":"Холодные напитки","price":210,"status":"available","date_created":"2023-05-16T10:15:00","description":"Охлажденный латте со льдом"},
+{"id":1010,"name":"Зеленый чай","category":"Чай","price":150,"status":"available","date_created":"2023-05-17T11:30:00","description":"Классический зеленый чай"},
+{"id":1011,"name":"Черный чай","category":"Чай","price":150,"status":"available","date_created":"2023-05-18T12:45:00","description":"Классический черный чай"},
+{"id":1012,"name":"Фруктовый чай","category":"Чай","price":170,"status":"available","date_created":"2023-05-19T13:20:00","description":"Чай с добавлением фруктов"},
+{"id":1013,"name":"Круассан","category":"Выпечка","price":160,"status":"available","date_created":"2023-05-20T08:30:00","description":"Классический французский круассан"},
+{"id":1014,"name":"Сэндвич с курицей","category":"Закуски","price":250,"status":"unavailable","date_created":"2023-05-21T09:45:00","description":"Сэндвич с куриным филе и овощами"},
+{"id":1015,"name":"Чизкейк","category":"Десерты","price":240,"status":"available","date_created":"2023-05-22T10:10:00","description":"Классический нью-йоркский чизкейк"}
+]

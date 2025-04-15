@@ -62,8 +62,27 @@
           <SharedUsersTable class="mb-4" />
         </template>
         
+        <!-- Таблица продуктов -->
+        <template v-if="showProducts">
+          <div class="table-header mb-3">
+            <h3 class="text-lg font-medium">Каталог продуктов</h3>
+            <UButton 
+              color="neutral"
+              variant="ghost"
+              size="sm"
+              icon="i-heroicons-x-mark-20-solid"
+              @click="showProducts = false"
+            >
+              Скрыть каталог
+            </UButton>
+          </div>
+          
+          <SharedProductsTable :products="products" class="mb-4" />
+        </template>
+        
         <SharedActionButtons 
           @table="showTable = true" 
+          @products="showProducts = true"
           @logout="$emit('logout')" 
         />
       </div>
@@ -74,7 +93,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import type { User } from '~/types/user'
-import { ref } from 'vue'
+import type { Product } from '~/types/product'
+import { ref, onMounted } from 'vue'
 
 defineProps({
   user: {
@@ -90,8 +110,22 @@ defineProps({
 
 defineEmits(['logout'])
 
-// Состояние отображения таблицы
+// Состояние отображения таблиц
 const showTable = ref(false)
+const showProducts = ref(false)
+
+// Загрузка данных о продуктах
+const products = ref<Product[]>([])
+
+// Загружаем продукты при монтировании компонента
+onMounted(async () => {
+  try {
+    const { data } = await useFetch<Product[]>('/data/products.json')
+    products.value = data.value || []
+  } catch (error) {
+    console.error('Ошибка загрузки продуктов:', error)
+  }
+})
 </script>
 
 <style lang="scss" scoped>
