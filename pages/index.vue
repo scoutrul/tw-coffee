@@ -11,12 +11,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 
-definePageMeta({
-  pageTransition: {
-    name: 'page'
-  }
-})
-
 const router = useRouter()
 const { login, logout, isAuthenticated, user } = useAuth()
 

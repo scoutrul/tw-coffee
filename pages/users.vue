@@ -122,24 +122,24 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import type { User } from '~/types/user'
 
-definePageMeta({
-  pageTransition: {
-    name: 'page'
+// Создает пустое состояние пользователя
+function initialUserState() {
+  return {
+    name: '',
+    surname: '',
+    email: '',
+    password: '',
+    active: true
   }
-})
+}
 
 // Форма для нового пользователя
-const newUser = ref({
-  name: '',
-  surname: '',
-  email: '',
-  password: '',
-  active: true
-})
-
+const newUser = ref(initialUserState())
 const showAddUserModal = ref(false)
-const toast = useToast()
+const toast = useCustomToast()
 
 // Обновление таблицы
 function refreshTable() {
@@ -161,14 +161,7 @@ function addUser() {
   })
   
   // Сброс формы и закрытие модального окна
-  newUser.value = {
-    name: '',
-    surname: '',
-    email: '',
-    password: '',
-    active: true
-  }
-  
+  newUser.value = initialUserState()
   showAddUserModal.value = false
 }
 </script>

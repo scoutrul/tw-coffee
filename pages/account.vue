@@ -10,13 +10,6 @@
 import { useRouter } from 'vue-router'
 
 // Страница аккаунта с защищенным доступом
-definePageMeta({
-  pageTransition: {
-    name: 'bounce',
-    mode: 'out-in'
-  }
-})
-
 const { user, logout } = useAuth()
 const router = useRouter()
 
