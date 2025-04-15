@@ -14,7 +14,7 @@ defineProps({
   },
   icon: {
     type: String,
-    default: 'i-heroicons-coffee-20-solid'
+    default: 'i-heroicons-beaker-20-solid'
   }
 })
 </script>

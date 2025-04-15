@@ -2,7 +2,7 @@
   <div class="welcome-page container">
     <UCard class="welcome-card">
       <template #header>
-        <SharedCardHeader title="Империя Кофе" icon="i-heroicons-coffee-20-solid" class="text-center" />
+        <SharedCardHeader title="Империя Кофе" icon="i-heroicons-beaker-20-solid" class="text-center" />
       </template>
 
       <div class="text-center py-4">
