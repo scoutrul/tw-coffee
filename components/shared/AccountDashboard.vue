@@ -116,14 +116,18 @@ const showProducts = ref(false)
 
 // Загрузка данных о продуктах
 const products = ref<Product[]>([])
+const loading = ref(false)
 
 // Загружаем продукты при монтировании компонента
 onMounted(async () => {
   try {
-    const { data } = await useFetch<Product[]>('/data/products.json')
-    products.value = data.value || []
+    loading.value = true
+    const data = await $fetch<Product[]>('/data/products.json')
+    products.value = data || []
   } catch (error) {
     console.error('Ошибка загрузки продуктов:', error)
+  } finally {
+    loading.value = false
   }
 })
 </script>

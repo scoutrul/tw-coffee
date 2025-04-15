@@ -1,10 +1,18 @@
 <template>
-  <div>
-    <!-- Компонент главной страницы -->
-    <SharedWelcomeCard v-if="!isAuthenticated" @login-submit="handleLoginSubmit" />
+  <div class="welcome-page container">
+    <ClientOnly>
+      <!-- Компонент главной страницы -->
+      <SharedWelcomeCard v-if="!isAuthenticated" @login-submit="handleLoginSubmit" />
 
-    <!-- Если пользователь авторизован, показываем компонент аккаунта -->
-    <SharedAccountDashboard v-else :user="user" @logout="handleLogout" />
+      <!-- Если пользователь авторизован, показываем компонент аккаунта -->
+      <SharedAccountDashboard v-else :user="user" @logout="handleLogout" />
+      
+      <template #fallback>
+        <div class="loading-container">
+          <p>Загрузка...</p>
+        </div>
+      </template>
+    </ClientOnly>
   </div>
 </template>
 
@@ -21,4 +29,19 @@ async function handleLoginSubmit(formData: { email: string; password: string }) 
 function handleLogout() {
   logout()
 }
-</script> 
+</script>
+
+<style lang="scss" scoped>
+@use '@/assets/scss/variables' as *;
+@use '@/assets/scss/mixins' as *;
+
+.welcome-page {
+  padding: $spacing-unit * 2;
+}
+
+.loading-container {
+  @include flex-column-center;
+  justify-content: center;
+  min-height: 300px;
+}
+</style> 
