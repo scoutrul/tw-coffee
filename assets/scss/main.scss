@@ -1,24 +1,48 @@
-// Переменные
-$primary-color: #4CAF50;
-$primary-color-hover: #45a049;
-$text-color: #333;
-$background-color: #f5f5f5;
-$card-background: #fff;
-$border-radius: 4px;
-$spacing-unit: 1rem;
+// Главный файл стилей
+// Импортируем все части в правильном порядке
 
-// Базовые стили
+// Переменные и миксины
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'typography' as *;
+@use 'components' as *;
+
+// Базовые стили для всего сайта
 body {
-  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: $font-family-sans;
   color: $text-color;
   background-color: $background-color;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  line-height: 1.5;
+  font-size: $font-size-base;
 }
 
 *, *::before, *::after {
   box-sizing: inherit;
+}
+
+// Дополнительные глобальные стили
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+}
+
+// Стили для анимаций страниц
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -1,0 +1,141 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// Базовые компоненты
+
+// Кнопки
+.button {
+  display: inline-block;
+  background-color: $primary-color;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: $border-radius;
+  font-weight: $font-weight-medium;
+  @include transition(background-color);
+  border: none;
+  cursor: pointer;
+  font-size: $font-size-base;
+  text-align: center;
+  
+  &:hover {
+    background-color: $primary-color-hover;
+    text-decoration: none;
+  }
+  
+  &.button-outline {
+    background-color: transparent;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    
+    &:hover {
+      background-color: rgba($primary-color, 0.1);
+    }
+  }
+  
+  &.button-small {
+    padding: 0.5rem 1rem;
+    font-size: $font-size-sm;
+  }
+  
+  &.button-large {
+    padding: 1rem 2rem;
+    font-size: $font-size-lg;
+  }
+}
+
+// Карточки
+.card {
+  background-color: $card-background;
+  border-radius: $border-radius;
+  padding: $spacing-unit;
+  @include card-shadow;
+  
+  .card-header {
+    margin-bottom: $spacing-unit;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: $spacing-unit * 0.5;
+  }
+  
+  .card-body {
+    margin-bottom: $spacing-unit;
+  }
+  
+  .card-footer {
+    padding-top: $spacing-unit * 0.5;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Контейнер
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-unit;
+  
+  @include breakpoint-up(sm) {
+    max-width: 540px;
+  }
+  
+  @include breakpoint-up(md) {
+    max-width: 720px;
+  }
+  
+  @include breakpoint-up(lg) {
+    max-width: 960px;
+  }
+  
+  @include breakpoint-up(xl) {
+    max-width: 1140px;
+  }
+  
+  @include breakpoint-up(2xl) {
+    max-width: 1320px;
+  }
+}
+
+// Utilities
+.flex-center {
+  @include flex-center;
+}
+
+.flex-row-center {
+  @include flex-row-center;
+}
+
+.flex-column-center {
+  @include flex-column-center;
+}
+
+.mb-1 {
+  margin-bottom: $spacing-unit * 0.25;
+}
+
+.mb-2 {
+  margin-bottom: $spacing-unit * 0.5;
+}
+
+.mb-3 {
+  margin-bottom: $spacing-unit;
+}
+
+.mb-4 {
+  margin-bottom: $spacing-unit * 1.5;
+}
+
+.mt-1 {
+  margin-top: $spacing-unit * 0.25;
+}
+
+.mt-2 {
+  margin-top: $spacing-unit * 0.5;
+}
+
+.mt-3 {
+  margin-top: $spacing-unit;
+}
+
+.mt-4 {
+  margin-top: $spacing-unit * 1.5;
+} 

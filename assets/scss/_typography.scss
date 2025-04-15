@@ -1,0 +1,101 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// Базовые типографические стили
+
+// Заголовки
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  font-family: $font-family-sans;
+  font-weight: $font-weight-bold;
+  color: $text-color;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: $font-size-3xl;
+  margin-bottom: $spacing-unit;
+}
+
+h2 {
+  font-size: $font-size-2xl;
+  margin-bottom: $spacing-unit * 0.75;
+}
+
+h3 {
+  font-size: $font-size-xl;
+  margin-bottom: $spacing-unit * 0.5;
+}
+
+h4 {
+  font-size: $font-size-lg;
+  margin-bottom: $spacing-unit * 0.5;
+}
+
+h5, h6 {
+  font-size: $font-size-base;
+  margin-bottom: $spacing-unit * 0.5;
+}
+
+// Параграфы
+p {
+  margin-top: 0;
+  margin-bottom: $spacing-unit;
+  line-height: 1.6;
+}
+
+// Ссылки
+a {
+  color: $primary-color;
+  text-decoration: none;
+  @include transition(color);
+  
+  &:hover {
+    color: $primary-color-hover;
+    text-decoration: underline;
+  }
+}
+
+// Списки
+ul, ol {
+  margin-top: 0;
+  margin-bottom: $spacing-unit;
+  padding-left: $spacing-unit * 1.5;
+  
+  li {
+    margin-bottom: $spacing-unit * 0.25;
+  }
+}
+
+// Выделенный текст
+.text-primary {
+  color: $primary-color;
+}
+
+.text-error {
+  color: $error-color;
+}
+
+.text-success {
+  color: $success-color;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-bold {
+  font-weight: $font-weight-bold;
+}
+
+.text-sm {
+  font-size: $font-size-sm;
+}
+
+.text-lg {
+  font-size: $font-size-lg;
+}
+
+.text-xl {
+  font-size: $font-size-xl;
+} 
