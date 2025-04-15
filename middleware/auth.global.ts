@@ -8,6 +8,9 @@ export default defineNuxtRouteMiddleware((to) => {
   // Пути, доступные без аутентификации
   const publicRoutes = ['/', '/login']
   
+  // Защищенные пути, требующие аутентификации
+  const protectedRoutes = ['/account', '/users']
+  
   // Если пользователь не авторизован и пытается открыть закрытую страницу
   if (!isAuthenticated.value && !publicRoutes.includes(to.path)) {
     return navigateTo('/')
