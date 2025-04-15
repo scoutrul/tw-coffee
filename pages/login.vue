@@ -13,20 +13,23 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 
-definePageMeta({
-  pageTransition: {
-    name: 'page'
-  }
-})
-
 const router = useRouter()
 const { login } = useAuth()
+const toast = useCustomToast()
 
 async function handleLogin({ email, password }: { email: string, password: string }) {
   // Используем email в качестве username для совместимости с API аутентификации
   const success = await login(email, password)
   
   if (success) {
+    // Показываем уведомление об успешном входе
+    toast.add({
+      title: 'Вход выполнен',
+      description: 'Вы успешно вошли в систему',
+      color: 'success',
+      icon: 'i-heroicons-check-circle'
+    })
+    
     // Переход на страницу аккаунта
     router.push('/account')
   }
