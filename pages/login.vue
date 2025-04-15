@@ -23,7 +23,7 @@ const router = useRouter()
 const { login } = useAuth()
 
 async function handleLogin({ email, password }: { email: string, password: string }) {
-  // Попытка входа
+  // Используем email в качестве username для совместимости с API аутентификации
   const success = await login(email, password)
   
   if (success) {
