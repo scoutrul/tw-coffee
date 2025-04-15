@@ -1,9 +1,11 @@
 <template>
-  <!-- Компонент главной страницы -->
-  <SharedWelcomeCard v-if="!isAuthenticated" @login-submit="handleLoginSubmit" />
+  <div>
+    <!-- Компонент главной страницы -->
+    <SharedWelcomeCard v-if="!isAuthenticated" @login-submit="handleLoginSubmit" />
 
-  <!-- Если пользователь авторизован, показываем компонент аккаунта -->
-  <SharedAccountDashboard v-else :user="user" @logout="handleLogout" />
+    <!-- Если пользователь авторизован, показываем компонент аккаунта -->
+    <SharedAccountDashboard v-else :user="user" @logout="handleLogout" />
+  </div>
 </template>
 
 <script setup lang="ts">
