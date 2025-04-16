@@ -20,47 +20,6 @@
 
       <div class="account-content">
         <SharedUserProfile v-if="user" :user="user" class="mb-4" />
-
-        <UAlert
-          v-if="!showTable"
-          icon="i-heroicons-information-circle"
-          color="info"
-          variant="soft"
-          title="Информация"
-          class="mb-4"
-        >
-          <div class="alert-content">
-            <p>Вы можете просмотреть список пользователей системы</p>
-            <UButton 
-              color="primary"
-              variant="soft"
-              size="sm"
-              class="ms-2"
-              icon="i-heroicons-table-cells-20-solid"
-              @click="showTable = true"
-            >
-              Показать таблицу
-            </UButton>
-          </div>
-        </UAlert>
-        
-        <!-- Таблица пользователей -->
-        <template v-if="showTable">
-          <div class="table-header mb-3">
-            <h3 class="text-lg font-medium">Список пользователей</h3>
-            <UButton 
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              icon="i-heroicons-x-mark-20-solid"
-              @click="showTable = false"
-            >
-              Скрыть таблицу
-            </UButton>
-          </div>
-          
-          <SharedUsersTable class="mb-4" />
-        </template>
         
         <!-- Таблица продуктов -->
         <template v-if="showProducts">
@@ -77,12 +36,18 @@
             </UButton>
           </div>
           
-          <SharedProductsTable :products="products" class="mb-4" />
+          <ClientOnly>
+            <SharedProductsTable 
+              :products="products" 
+              :loading="loading" 
+              class="mb-4" 
+              :key="tableKey" 
+            />
+          </ClientOnly>
         </template>
         
         <SharedActionButtons 
-          @table="showTable = true" 
-          @products="showProducts = true"
+          @products="toggleProducts" 
           @logout="$emit('logout')" 
         />
       </div>
@@ -94,7 +59,7 @@
 import type { PropType } from 'vue'
 import type { User } from '~/types/user'
 import type { Product } from '~/types/product'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 
 defineProps({
   user: {
@@ -111,8 +76,19 @@ defineProps({
 defineEmits(['logout'])
 
 // Состояние отображения таблиц
-const showTable = ref(false)
-const showProducts = ref(false)
+const showProducts = ref(true)
+
+// Генератор ключей для принудительного перерендеринга компонента
+const tableKey = ref(0)
+
+// Функция для переключения отображения каталога
+function toggleProducts() {
+  showProducts.value = !showProducts.value
+  if (showProducts.value) {
+    // Принудительное обновление компонента таблицы
+    tableKey.value++
+  }
+}
 
 // Загрузка данных о продуктах
 const products = ref<Product[]>([])
@@ -124,6 +100,12 @@ onMounted(async () => {
     loading.value = true
     const data = await $fetch<Product[]>('/data/products.json')
     products.value = data || []
+    
+    // Добавляем задержку и принудительно обновляем компонент после загрузки данных
+    await nextTick()
+    setTimeout(() => {
+      tableKey.value++
+    }, 100)
   } catch (error) {
     console.error('Ошибка загрузки продуктов:', error)
   } finally {
