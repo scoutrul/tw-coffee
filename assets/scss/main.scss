@@ -7,6 +7,10 @@
 @use 'typography' as *;
 @use 'components' as *;
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 // Базовые стили для всего сайта
 body {
   font-family: $font-family-sans;

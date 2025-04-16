@@ -23,7 +23,10 @@ const router = useRouter()
 const { login, logout, isAuthenticated, user } = useAuth()
 
 async function handleLoginSubmit(formData: { email: string; password: string }) {
-  await login(formData.email, formData.password)
+  const success = await login(formData.email, formData.password)
+  if (success) {
+    router.push('/account')
+  }
 }
 
 function handleLogout() {

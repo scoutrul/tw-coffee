@@ -4,6 +4,12 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui'],
   css: ['~/assets/scss/main.scss'],
   devtools: { enabled: true },
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   icon: {
     size: '24px',
     class: '',
@@ -35,12 +41,6 @@ export default defineNuxtConfig({
   typescript: {
     strict: false,
     typeCheck: false
-  },
-  postcss: {
-    plugins: {
-      autoprefixer: {},
-      cssnano: { preset: 'default' }
-    }
   },
   vite: {
     css: {
