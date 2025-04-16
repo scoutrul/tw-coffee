@@ -47,10 +47,19 @@ export default defineAppConfig({
         position: 'bottom-left',
         duration: 2000,
         closeButton: {
-          icon: 'i-heroicons-x-mark-20-solid',
-          color: 'gray',
-          variant: 'link',
-          padded: true
+          icon: 'i-heroicons-x-mark-20-solid'
+        }
+      },
+      slots: {
+        root: 'bg-white border-l-4 rounded-md'
+      },
+      variants: {
+        color: {
+          primary: { root: 'border-primary-500' },
+          success: { root: 'border-green-500' },
+          error: { root: 'border-red-500' },
+          info: { root: 'border-blue-500' },
+          warning: { root: 'border-yellow-500' }
         }
       }
     }
