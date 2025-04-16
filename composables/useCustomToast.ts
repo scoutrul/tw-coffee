@@ -1,3 +1,4 @@
+// @ts-ignore - импорт из внутреннего Nuxt API
 import { useToast as useNuxtToast } from '#imports'
 
 export function useCustomToast() {
@@ -5,9 +6,13 @@ export function useCustomToast() {
   
   // Обертка над стандартным toast.add без переопределения продолжительности
   function addToast(options: any): any {
-    // Используем только пользовательские опции, не переопределяя продолжительность
-    // Глобальные настройки берутся из app.config.ts
-    return nuxtToast.add(options)
+    // Используем только пользовательские опции с явным указанием иконки закрытия
+    return nuxtToast.add({
+      closeButton: {
+        icon: 'i-heroicons-x-mark-20-solid'
+      },
+      ...options,
+    })
   }
   
   return {
