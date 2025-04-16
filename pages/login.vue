@@ -13,6 +13,11 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 
+// Устанавливаем метаданные страницы
+definePageMeta({
+  title: 'Вход в систему'
+})
+
 const router = useRouter()
 const { login } = useAuth()
 const toast = useCustomToast()

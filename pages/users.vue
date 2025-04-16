@@ -125,6 +125,11 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import type { User } from '~/types/user'
 
+// Устанавливаем метаданные страницы
+definePageMeta({
+  title: 'Управление пользователями'
+})
+
 // Создает пустое состояние пользователя
 function initialUserState() {
   return {

@@ -1,3 +1,18 @@
+<script setup>
+// Устанавливаем глобальные метатеги
+useHead({
+  titleTemplate: '%s | Империя Кофе',
+  meta: [
+    { name: 'description', content: 'Управление бизнесом по продаже кофе' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { charset: 'utf-8' }
+  ],
+  link: [
+    { rel: 'icon', type: 'image/png', href: '/favicon.png' }
+  ]
+})
+</script>
+
 <template>
   <UApp>
     <NuxtLayout>

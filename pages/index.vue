@@ -20,6 +20,11 @@
 import { useRouter } from 'vue-router'
 import { useCustomToast } from '@/composables/useCustomToast'
 
+// Устанавливаем метаданные страницы
+definePageMeta({
+  title: 'Главная'
+})
+
 const router = useRouter()
 const { login, logout, isAuthenticated, user } = useAuth()
 const toast = useCustomToast()

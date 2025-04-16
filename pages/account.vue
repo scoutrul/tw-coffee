@@ -10,6 +10,11 @@
 import { useRouter } from 'vue-router'
 import { useCustomToast } from '../composables/useCustomToast'
 
+// Устанавливаем метаданные страницы
+definePageMeta({
+  title: 'Личный кабинет'
+})
+
 // Страница аккаунта с защищенным доступом
 const { user, logout } = useAuth()
 const router = useRouter()
