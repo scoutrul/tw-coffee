@@ -84,25 +84,30 @@ const selectedStatus = ref('')
 const columns = [
   {
     key: 'name',
+    id: 'name',
     label: 'Имя',
     sortable: true
   },
   {
     key: 'credentials.username',
+    id: 'username',
     label: 'Email',
     sortable: true
   },
   {
     key: 'status',
+    id: 'status',
     label: 'Статус'
   },
   {
     key: 'created',
+    id: 'created',
     label: 'Дата регистрации',
     sortable: true
   },
   {
     key: 'actions',
+    id: 'actions',
     label: 'Действия',
     align: 'center'
   }

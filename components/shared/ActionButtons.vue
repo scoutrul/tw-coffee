@@ -1,62 +1,30 @@
 <template>
   <div class="action-buttons">
-    <UButton
-      v-if="showLogoutButton"
-      color="error"
-      class="logout-button"
-      @click="handleLogout"
-      icon="i-heroicons-arrow-right-on-rectangle"
-    >
-      Выход
-    </UButton>
-    
-    <UButton
+    <UButton 
       color="primary"
-      @click="$emit('table')"
-      icon="i-heroicons-table-cells-20-solid"
-      class="me-2"
-    >
-      Пользователи
-    </UButton>
-    
-    <UButton
-      color="primary"
+      variant="soft"
+      icon="i-heroicons-folder-open-20-solid"
+      class="action-button"
       @click="$emit('products')"
-      icon="i-heroicons-shopping-bag-20-solid"
-      class="me-2"
     >
-      Каталог
+      Каталог продуктов
+    </UButton>
+    
+    <UButton 
+      color="error"
+      variant="soft"
+      icon="i-heroicons-power-20-solid"
+      class="action-button"
+      @click="$emit('logout')"
+    >
+      Выйти
     </UButton>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const toast = useCustomToast()
-const emit = defineEmits(['logout', 'table', 'products'])
-
-defineProps({
-  showLogoutButton: {
-    type: Boolean,
-    default: true
-  }
-})
-
-// Обработчик для кнопки выхода из системы
-function handleLogout() {
-  toast.add({
-    title: 'Выход из системы',
-    description: 'Выполняется выход...',
-    color: 'primary',
-    icon: 'i-heroicons-power-20-solid'
-  })
-  
-  // Небольшая задержка, чтобы показать уведомление перед выходом
-  setTimeout(() => {
-    emit('logout')
-  }, 1000)
-}
+// Определяем события, которые могут быть вызваны из компонента
+defineEmits(['products', 'logout'])
 </script>
 
 <style lang="scss" scoped>
@@ -64,12 +32,12 @@ function handleLogout() {
 @use '@/assets/scss/mixins' as *;
 
 .action-buttons {
-  display: flex;
-  margin-top: $spacing-unit * 1.5;
+  @include flex-row-center;
+  flex-wrap: wrap;
+  gap: $spacing-unit;
 }
 
-.logout-button {
-  background-color: $primary-color;
-  color: white;
+.action-button {
+  @include flex-row-center;
 }
 </style> 
