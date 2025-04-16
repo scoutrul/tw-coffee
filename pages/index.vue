@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { useCustomToast } from '@/composables/useCustomToast'
 
 // Устанавливаем метаданные страницы
 definePageMeta({
@@ -27,7 +26,6 @@ definePageMeta({
 
 const router = useRouter()
 const { login, logout, isAuthenticated, user } = useAuth()
-const toast = useCustomToast()
 
 async function handleLoginSubmit(formData: { email: string; password: string }) {
   const success = await login(formData.email, formData.password)

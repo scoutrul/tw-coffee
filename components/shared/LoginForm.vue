@@ -58,6 +58,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue'
+import { useToast } from '#imports'
 
 const props = defineProps({
   submitText: {
@@ -69,7 +70,7 @@ const props = defineProps({
 const emit = defineEmits(['submit'])
 
 const { error: authError, loading } = useAuth()
-const toast = useCustomToast()
+const toast = useToast()
 
 const form = ref({
   email: '',

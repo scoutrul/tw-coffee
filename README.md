@@ -25,10 +25,10 @@ kofe/
 │   └── shared/         # Общие компоненты
 │       ├── CardHeader.vue       # Заголовок карточек с иконкой
 │       ├── LoginForm.vue        # Форма авторизации
-│       ├── ToastProvider.vue    # Провайдер уведомлений
+│       ├── ProductsTable.vue    # Таблица продуктов
+│       ├── ToastProvider.vue    # Компонент для уведомлений
 │       ├── AccountDashboard.vue # Панель аккаунта
 │       ├── UserProfile.vue      # Профиль пользователя
-│       ├── UsersTable.vue       # Таблица пользователей
 │       └── ...
 ├── composables/        # Композабл-функции
 │   └── useAuth.ts      # Управление аутентификацией

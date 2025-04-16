@@ -12,6 +12,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { useToast } from '#imports'
 
 // Устанавливаем метаданные страницы
 definePageMeta({
@@ -20,7 +21,7 @@ definePageMeta({
 
 const router = useRouter()
 const { login } = useAuth()
-const toast = useCustomToast()
+const toast = useToast()
 
 async function handleLogin({ email, password }: { email: string, password: string }) {
   // Используем email в качестве username для совместимости с API аутентификации

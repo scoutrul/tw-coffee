@@ -1,10 +1,10 @@
 import { useAuth } from './useAuth'
-import { useCustomToast } from './useCustomToast'
+import { useToast } from '#imports'
 import { useNavigation } from './useNavigation'
 
 export function useAuthWithUI() {
   const auth = useAuth()
-  const toast = useCustomToast()
+  const toast = useToast()
   const navigation = useNavigation()
   
   // Логин с уведомлением и навигацией

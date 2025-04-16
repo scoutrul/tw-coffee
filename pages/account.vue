@@ -8,7 +8,8 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { useCustomToast } from '../composables/useCustomToast'
+import { useAuth } from '../composables/useAuth'
+import { useToast } from '#imports'
 
 // Устанавливаем метаданные страницы
 definePageMeta({
@@ -18,7 +19,7 @@ definePageMeta({
 // Страница аккаунта с защищенным доступом
 const { user, logout } = useAuth()
 const router = useRouter()
-const toast = useCustomToast()
+const toast = useToast()
 
 function handleLogout() {
   logout()
