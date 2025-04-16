@@ -18,19 +18,34 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { useCustomToast } from '@/composables/useCustomToast'
 
 const router = useRouter()
 const { login, logout, isAuthenticated, user } = useAuth()
+const toast = useCustomToast()
 
 async function handleLoginSubmit(formData: { email: string; password: string }) {
   const success = await login(formData.email, formData.password)
   if (success) {
+    // Показываем уведомление об успешном входе
+    toast.add({
+      title: 'Успешный вход',
+      description: 'Вы успешно вошли в систему',
+      color: 'success',
+      icon: 'i-heroicons-check-circle'
+    })
     router.push('/account')
   }
 }
 
 function handleLogout() {
   logout()
+  toast.add({
+    title: 'Выход из системы',
+    description: 'Вы успешно вышли из системы',
+    color: 'info',
+    icon: 'i-heroicons-arrow-left-circle'
+  })
 }
 </script>
 

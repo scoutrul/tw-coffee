@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, watch } from 'vue'
 
 const props = defineProps({
   submitText: {
@@ -79,6 +79,18 @@ const form = ref({
 const errors = reactive({
   email: '',
   password: ''
+})
+
+// Отслеживаем изменение ошибки авторизации
+watch(() => authError.value, (newError) => {
+  if (newError) {
+    toast.add({
+      title: 'Ошибка входа',
+      description: newError,
+      color: 'error',
+      icon: 'i-heroicons-exclamation-triangle'
+    })
+  }
 })
 
 // Валидация формы для UForm
@@ -105,6 +117,16 @@ async function validateForm(state: Partial<typeof form.value>) {
   } else if (state.password && state.password.length < 3) {
     errors.password = 'Пароль должен содержать не менее 3 символов'
     validationErrors.push({ path: 'password', message: errors.password })
+  }
+  
+  // Показываем тост, если есть ошибки валидации
+  if (validationErrors.length > 0) {
+    toast.add({
+      title: 'Ошибка ввода данных',
+      description: 'Пожалуйста, проверьте корректность заполнения формы',
+      color: 'warning',
+      icon: 'i-heroicons-exclamation-circle'
+    })
   }
   
   return validationErrors

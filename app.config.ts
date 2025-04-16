@@ -45,7 +45,7 @@ export default defineAppConfig({
     toast: {
       default: {
         position: 'bottom-left',
-        duration: 30000,
+        duration: 2000,
         closeButton: {
           icon: 'i-heroicons-x-mark-20-solid',
           color: 'gray',
